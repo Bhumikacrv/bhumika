@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+   <input type="text" name="" id="name" placeholder="name" autocomplete="off" >
+   <input type="text" name="" id="age" placeholder="age">
+   <input type="text" name="" id="sal" placeholder="sal">
+   <button onclick="send()">send</button>
+
+   <script>
+    function send(){
+        const ename=document.getElementById('name').value;
+        const eage=document.getElementById('age').value;
+        const esal=document.getElementById('sal').value;
+
+       if(ename && eage && esal){
+        let stud = {
+            name : ename,
+            age : eage,
+            sal : esal
+
+        }
+        localStorage.setItem("user",JSON.stringify(stud));
+        location.href='detail.html';
+        
+       }
+           
+       else{
+        alert('noo')
+       }
+    }
+   </script>
+</body>
+</html>

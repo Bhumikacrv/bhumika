@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    
+  </head>
+
+  <body>
+   <script>
+    function checkVal(form) {
+      for (var i = 1; i <= 3; i++) {
+          console.log("qt" + i, form["qt" + i].value);
+      }
+  }
+   </script>
+  <form>
+      <input type="text" name="qt1" value="input1" />
+      <br/>
+      <input type="text" name="qt2" value="input2" />
+      <br/>
+      <input type="text" name="qt3" value="input3" />
+      <br/>
+      <input type="submit" value="Submit" onClick="checkVal(this.form); return false;" />
+  </form>
+  </body>
+</html>

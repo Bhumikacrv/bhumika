@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dynamic Form</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+</head>
+<body>
+<div class="col-md-7">
+    <form method="POST" id="dynamicForm">
+        <h2>My Form</h2>
+        <div id="forms" class="form-inline">
+            <input type="text" class="form-control" style="width:80%;" placeholder="Please enter here" name="form[]">
+        </div>
+        <br />
+        <button type="button" class="btn btn-primary" onclick="addField();">Add Field</button>
+        <button type="button" class="btn btn-success" onclick="send();">Send</button>
+    </form>
+</div>
+
+<script>
+var fieldId = 0;
+
+function addElement(parentId, elementTag, elementId, html){
+    var id = document.getElementById(parentId);
+    var newElement = document.createElement(elementTag);
+    newElement.setAttribute('id', elementId);
+    newElement.innerHTML = html;
+    id.appendChild(newElement);
+}
+
+function removeField(elementId){
+    var fieldId = "field-" + elementId;
+    var element = document.getElementById(fieldId);
+    element.parentNode.removeChild(element);
+}
+
+function addField(){
+    fieldId++;
+    var html = '<br /><input type="text" name="form[]" class="form-control" placeholder="Please enter here" style="width:80%;">' + 
+               '<button type="button" onclick="removeField(' + fieldId + ');"><span class="glyphicon glyphicon-minus"></span></button><br />';
+    addElement('forms', 'div', 'field-' + fieldId, html);
+}
+
+function send(){
+    var form = document.getElementById('dynamicForm');
+    var formData = new FormData(form);
+    var entries = formData.getAll('form[]');
+    console.log(entries); // This will log all the input values to the console
+
+    // You can then send these values to the server using an AJAX request, for example:
+    /*
+    fetch('/your-server-endpoint', {
+        method: 'POST',
+        body: new URLSearchParams(formData)
+    }).then(response => response.json())
+      .then(data => console.log(data))
+      .catch(error => console.error('Error:', error));
+    */
+}
+</script>
+</body>
+</html>
